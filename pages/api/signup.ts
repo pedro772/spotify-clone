@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import cookie from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../lib/prisma";
+import { getUserWithoutPassword } from "../../utils/utils";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const salt = bcrypt.genSaltSync();
@@ -43,12 +44,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       secure: process.env.NODE_ENV === "production",
     })
   );
-
-  const getUserWithoutPassword = (_user) => {
-    const userWithoutPassword = { ..._user };
-    delete userWithoutPassword.password;
-    return userWithoutPassword;
-  };
 
   res.json(getUserWithoutPassword(user));
 };
