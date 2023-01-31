@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import cookie from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../lib/prisma";
-import { getUserWithoutPassword } from "../../utils/utils";
+import getUserWithoutPassword from "../../lib/getUserWIthoutPassword";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, password } = req.body;
